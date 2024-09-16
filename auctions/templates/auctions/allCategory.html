@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+
+<h2>All Categories </h2>
+<div class="categories">
+    {% for category in allCategory %}
+
+            <a href="{% url 'category' category.id %}">
+                {% if category.name == 'game' %}
+                    <img src="{% static 'my_images/Game.jpg' %}" />
+                {% endif %}
+
+                {% if category.name == 'sport' %}
+                    <img src="{% static 'my_images/Sport.jpg' %}" />
+                {% endif %}
+
+                {% if category.name == 'antique' %}
+                    <img src="{% static 'my_images/Antique.jpg' %}" />
+                {% endif %}
+            </a>
+
+    {% endfor %}
+</div>
+{% endblock %}

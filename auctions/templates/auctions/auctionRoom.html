@@ -1,0 +1,88 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+
+
+<h3>Auction for : {{auction_name}}</h3> 
+
+{% if statusLelang is False %}
+<h5>This Auction is Closed</h5>
+<h1>{{winner.user.name}} has won this Auction ! with {{winner}} dollar</h1>
+
+
+{% else %}
+
+<h5>This Auction is Open</h5>
+
+{% endif %}
+
+{% if request.user.name == thisAuction_host %}
+<p> 
+    <a class="closing" href="{% url 'closeAuction' thisAuction_id %}" onclick="closing();">Close Auction</a> 
+</p>
+{% endif %}
+
+<img src="{{image.url}}" />
+<br> <br>
+<h4 class="category">Category : {{auction_category}}</h4>
+<p class="description">{{description}}</p>
+<br>
+
+<h4>the initial price are {{initial_price}} $</h4>
+
+<div class="participants">
+    <p>participants are : </p>
+
+    {% for participant in participants %}
+    <strong>{{participant.name}}</strong>
+    {% endfor %}
+    <hr>
+</div>
+
+{% if request.user.is_authenticated %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if statusLelang == True %}
+
+<div>
+    <form method="POST" action=""> <!-- if action = "" , then send the POST to this current url. -->
+        <!-- enctype="multipart/form-data" basically tell the backend that we are actually submitting files with this form. and not just changing the content on the field -->
+        {% csrf_token %}
+        <input type="number" name="price" placeholder="10">
+        <input type="submit" value="submit">
+    </form>
+</div>
+
+{% endif %}
+
+{% endif %}
+
+{% for price in update_price %}
+<h4>{{price}}$  by  {{price.user.name}}</h4>
+{% endfor %}
+
+{% if statusLelang == True %}
+<div>
+    <a href="{% url 'yepcom' thisAuction_id %}">insert comment here</a>
+</div>
+{% endif %}
+
+<p>comments : </p>
+{% for comment in comments %}
+
+<strong> {{comment.user.name}} </strong>
+<p>{{comment}}</p>
+<hr>
+
+{% endfor %}
+
+
+{% endblock %}

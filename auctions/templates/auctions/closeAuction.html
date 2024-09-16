@@ -1,0 +1,13 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+
+<form method="POST" action=""> <!-- action ="" is basically sending the POST to the same url that refer to this page-->
+    {% csrf_token %}
+    are you sure you wanna close <strong> {{thisAuction}} </strong>  auction ?
+    <hr>
+    <a href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+    <input type="submit" value="Confirm">
+</form>
+
+{% endblock %}

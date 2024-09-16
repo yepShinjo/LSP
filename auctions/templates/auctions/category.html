@@ -1,0 +1,20 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+
+{{category}}
+
+{% for auction in categoryAuction %}
+
+<p> auction name <a href="{% url 'auctionRoom' auction.id %}"> {{auction}} </a> </p>
+<p> auction host <strong> {{auction.host.name}} </strong> </p>
+
+<div class="auction_image">
+    <img src="{{auction.images.url}}" />
+</div>
+
+<p> auction description <strong> {{auction.description}} </strong> </p>
+
+{% endfor %}
+
+{% endblock %}

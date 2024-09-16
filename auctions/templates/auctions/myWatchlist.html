@@ -1,0 +1,20 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+
+{% for watchlist in user_watchlist %}
+
+<div class="auction_image">
+    <img class="auction_image_image"src="{{watchlist.images.url}}" />
+
+    <p class="title">
+        <a class="title_link" href="{% url 'auctionRoom' watchlist.id %}">{{watchlist}}</a>
+    </p>
+
+</div>
+
+
+
+{% endfor %}
+
+{% endblock %}

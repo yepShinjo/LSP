@@ -1,0 +1,12 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<form method="POST" action="" enctype="multipart/form-data"> 
+    <!-- if action = "" , then send the POST to this current url. -->
+    <!-- enctype="multipart/form-data" basically tell the backend that we are actually submitting files with this form. and not just changing the content on the field -->
+    {% csrf_token %}
+    {{form.as_p}} <!-- so the form look better we make it look like a paragraph-->
+    <p> price in dollar </p> 
+    <input type="submit" value="submit">
+</form>
+{% endblock %}

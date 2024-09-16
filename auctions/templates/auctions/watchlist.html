@@ -1,0 +1,12 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+
+<form method="POST" action=""> <!-- action ="" is basically sending the POST to the same url that refer to this page-->
+    {% csrf_token %}
+    add/remove {{obj}} auction to watchlist ?
+    <a href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+    <input class="submit" type="submit" value="Confirm">
+</form>
+
+{% endblock %}

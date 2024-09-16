@@ -1,0 +1,87 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    
+
+<div class="main">
+
+
+
+    {% for auction in auctions %}
+    {% if auction.auction_status == True %}
+    <div class="auction__box">
+        <div class="auction_image">
+            <img src="{{auction.images.url}}" />
+        </div>
+        <h3 class="title">
+            <a class="title_link" href="{% url 'auctionRoom' auction.id %}">{{auction.auction_name}}</a>
+        </h3>
+
+        <p class="watchlist" >
+            <a class="watchlist_link" href="{% url 'watchlist' auction.id %}">Add watchlist</a>
+        </p>
+
+        </p>
+
+        <h3 class="price">
+            <br>
+            {{auction.initial_price}} $
+        </h3>
+
+        <p class="description">
+            <strong>Description</strong>
+            <br>
+            {{auction.description}}
+
+        <p>
+            <strong>Created by</strong>
+            {{auction.host.name}}
+        </p>
+    </div>
+
+    <hr>
+    {% endif %}
+
+    {% if auction.auction_status == False %}
+
+    <div class="auction__box">
+        <div class="auction_image">
+            <img src="{{auction.images.url}}" />
+        </div>
+
+        <h3 class="title">
+            <a class="title_link" href="{% url 'auctionRoom' auction.id %}">{{auction.auction_name}}</a>
+        </h3>
+        
+        <h3 class="price">
+            <br>
+            {{auction.initial_price}} $
+        </h3>
+
+        <p class="description">
+            <strong>Description</strong>
+            <br>
+            {{auction.description}}
+        </p>
+
+        <p>
+            <strong>Created by</strong>
+            {{auction.host.name}}
+        </p>
+    </div>
+
+    <hr>
+
+    {% endif %}
+
+    {% endfor %}
+
+
+
+</div>
+
+
+
+{% endblock %}
